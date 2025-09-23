@@ -1,0 +1,40 @@
+{
+  "name": "runemetrics-proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch --env-file .env src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src",
+    "start": "node dist/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "@types/node-cache": "^4.1.3",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "eslint": "^9.31.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/swagger": "^9.5.1",
+    "@fastify/swagger-ui": "^5.2.3",
+    "axios": "^1.10.0",
+    "dotenv": "^17.2.0",
+    "fastify": "^5.4.0",
+    "fastify-type-provider-zod": "^5.0.2",
+    "nanoid": "^5.1.5",
+    "node-cache": "^5.1.2",
+    "zod": "^4.0.5"
+  }
+}
