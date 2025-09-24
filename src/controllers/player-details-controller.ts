@@ -1,17 +1,16 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import runescapeService from '../services/runescape-service';
 import { PlayerDetailsResponse } from '../interfaces/player-details-response';
 import { classifyActivity } from '../utils/activities-type';
+import { getPlayerDetailsService } from '../services/player-details-service';
 
-
-export async function getPlayerDetail(
+export async function getPlayerDetailsController(
   request: FastifyRequest<{ Querystring: { name: string, activities: number } }>,
   reply: FastifyReply
 ): Promise<PlayerDetailsResponse> {
   const { name, activities } = request.query;
 
   try {
-    const profile = await runescapeService.getPlayerProfile({name, activities})
+    const profile = await getPlayerDetailsService({name, activities})
 
     const classifiedActivities = (profile.activities || []).map(classifyActivity);
 

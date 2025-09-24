@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
-import { getPlayerDetail } from '../controllers/runescape';
 import z from 'zod';
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
+import { getPlayerDetailsController } from '../controllers/player-details-controller';
 
 export default async function playerDetails(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>()
@@ -52,6 +52,6 @@ export default async function playerDetails(app: FastifyInstance) {
         }),
       },
     },
-    handler: getPlayerDetail,
+    handler: getPlayerDetailsController,
   });
 }
