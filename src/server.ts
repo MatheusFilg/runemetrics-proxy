@@ -10,6 +10,7 @@ import {
 } from 'fastify-type-provider-zod'
 import { errorHandler } from './error-handler'
 import playerDetails from './routes/player-details'
+import playerExperience from './routes/player-experience'
 
 dotenv.config()
 
@@ -41,10 +42,11 @@ app.register(fastifySwaggerUi, {
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(playerDetails)
-
 app.setErrorHandler(errorHandler)
 
 app.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
 	console.log('💻 Server Running!')
 })
+
+app.register(playerDetails)
+app.register(playerExperience)
