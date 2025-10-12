@@ -11,15 +11,17 @@ export interface PlayerDetailsResponse {
 	rank: string
 	melee: number
 	loggedIn: string
-	skillvalues: Skillvalue[]
+	skillvalues: SkillValue[]
 	activities: Activity[]
 }
 
-interface Skillvalue {
+export interface SkillValue {
 	level: number
 	xp: number
 	rank: number
 	id: number
+	percentageProgress: string
+	xpToNextLevel: number
 }
 
 export interface Activity {

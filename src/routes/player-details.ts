@@ -33,6 +33,8 @@ export default async function playerDetails(app: FastifyInstance) {
 							xp: z.number(),
 							rank: z.number(),
 							id: z.number(),
+							percentageProgress: z.string(),
+							xpToNextLevel: z.number(),
 						})
 					),
 					activities: z.array(

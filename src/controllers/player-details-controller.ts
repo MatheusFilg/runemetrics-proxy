@@ -2,6 +2,7 @@ import type { FastifyReply, FastifyRequest } from 'fastify'
 import type { PlayerDetailsResponse } from '../interfaces/player-details-response'
 import { getPlayerDetailsService } from '../services/player-details-service'
 import { classifyActivity } from '../utils/activities-type'
+import { calculateSkillProgress } from '../utils/calculate-skill-progress'
 
 export async function getPlayerDetailsController(
 	request: FastifyRequest<{
@@ -18,8 +19,13 @@ export async function getPlayerDetailsController(
 			classifyActivity
 		)
 
+		const calculatedSkills = (profile.skillvalues || []).map(
+			calculateSkillProgress
+		)
+
 		return {
 			...profile,
+			skillvalues: calculatedSkills,
 			activities: classifiedActivities,
 		}
 	} catch (error) {
