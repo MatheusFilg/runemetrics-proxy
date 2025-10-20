@@ -16,29 +16,66 @@ const xpTable: number[] = [
 	63555443, 70170840, 77474828, 85539082, 94442737, 104273167,
 ]
 
-export function calculateSkillProgress(skill: SkillValue): SkillValue {
-	const realXp = Math.floor(skill.xp / 10)
+const inventionXpTable: number[] = [
+	0, 0, 830, 1861, 2902, 3980, 5126, 6390, 7787, 9400, 11275, 13605, 16372,
+	19656, 23546, 28138, 33520, 39809, 47109, 55535, 64802, 77190, 90811, 106221,
+	123573, 143025, 164742, 188893, 215651, 245196, 277713, 316311, 358547,
+	404634, 454796, 509259, 568254, 632019, 700797, 774834, 854383, 946227,
+	1044569, 1149696, 1261903, 1381488, 1508756, 1644015, 1787581, 1939773,
+	2100917, 2283490, 2476369, 2679907, 2894505, 3120508, 3358307, 3608290,
+	3870846, 4146374, 4435275, 4758122, 5096111, 5449685, 5819299, 6205407,
+	6608473, 7028964, 7467354, 7924122, 8399751, 8925664, 9472665, 10041285,
+	10632061, 11245538, 11882262, 12542789, 13227679, 13937496, 14672812,
+	15478994, 16313404, 17176661, 18069395, 18992239, 19945833, 20930821,
+	21947856, 22997593, 24080695, 25259906, 26475754, 27728955, 29020233,
+	30350318, 31719944, 33129852, 34580790, 36073511, 37608773, 39270442,
+	40978509, 42733789, 44537107, 46389292, 48291180, 50243611, 52247435,
+	54303504, 56412678, 58575823, 60793812, 63067521, 65397835, 67785643,
+	70231841, 72737330, 75303019, 77929820, 80618654,
+]
 
-	if (skill.level >= xpTable.length - 1) {
+export function calculateSkillProgress(skill: SkillValue): SkillValue {
+	const displayXp = Math.floor(skill.xp / 10)
+
+	const isInvention = skill.id === 26
+	const relevantXpTable = isInvention ? inventionXpTable : xpTable
+
+	const currentLevel = skill.level
+
+	if (currentLevel >= 120) {
 		return {
 			...skill,
+			xp: displayXp,
 			percentageProgress: '100.00',
 			xpToNextLevel: 0,
 		}
 	}
 
-	const currentLevelXp = xpTable[skill.level]
-	const nextLevelXp = xpTable[skill.level + 1]
+	const nextLevelXpThreshold = relevantXpTable[currentLevel + 1]
 
-	const xpToNextLevel = nextLevelXp - realXp
-	const totalXpForLevel = nextLevelXp - currentLevelXp
-	const xpGainedInLevel = realXp - currentLevelXp
+	if (displayXp >= nextLevelXpThreshold) {
+		return {
+			...skill,
+			xp: displayXp,
+			percentageProgress: '100.00',
+			xpToNextLevel: 0,
+		}
+	}
+
+	const currentLevelXpThreshold = relevantXpTable[currentLevel]
+
+	const xpToNextLevel = nextLevelXpThreshold - displayXp
+	const totalXpForLevel = nextLevelXpThreshold - currentLevelXpThreshold
+	const xpGainedInLevel = displayXp - currentLevelXpThreshold
 
 	const progressPercentage =
-		totalXpForLevel > 0 ? (xpGainedInLevel / totalXpForLevel) * 100 : 0
+		totalXpForLevel > 0
+			? (Math.max(0, xpGainedInLevel) / totalXpForLevel) * 100
+			: 0
 
 	return {
 		...skill,
+		xp: displayXp, // Retorna a XP formatada para exibição
 		percentageProgress: progressPercentage.toFixed(2),
 		xpToNextLevel: Math.max(0, xpToNextLevel),
 	}
