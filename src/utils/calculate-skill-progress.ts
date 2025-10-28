@@ -75,7 +75,7 @@ export function calculateSkillProgress(skill: SkillValue): SkillValue {
 
 	return {
 		...skill,
-		xp: displayXp, // Retorna a XP formatada para exibição
+		xp: displayXp,
 		percentageProgress: progressPercentage.toFixed(2),
 		xpToNextLevel: Math.max(0, xpToNextLevel),
 	}

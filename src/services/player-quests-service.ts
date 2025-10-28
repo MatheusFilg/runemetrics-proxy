@@ -1,22 +1,13 @@
 import axios from 'axios'
-import type { PlayerExperienceResponse } from '../interfaces/player-experience-response'
+import type { PlayerQuestResponse } from '../interfaces/player-quests-response'
 import { apiClient } from '../lib/axios'
 
-interface getPlayerExperienceProps {
-	name: string
-	skillId: number
-}
-
-export async function getPlayerExperienceService({
-	name,
-	skillId,
-}: getPlayerExperienceProps) {
+export async function getPlayerQuestsService(user: string) {
 	try {
-		const response = await apiClient.get<PlayerExperienceResponse>(
-			`runemetrics/xp-monthly?searchName=${name}&skillid=${skillId}`
+		const response = await apiClient.get<PlayerQuestResponse>(
+			`runemetrics/quests?user=${user}`
 		)
-
-		if (!name) {
+		if (!user) {
 			throw new Error('Perfil não encontrado')
 		}
 

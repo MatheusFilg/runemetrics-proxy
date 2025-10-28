@@ -11,6 +11,7 @@ import {
 import { errorHandler } from './error-handler'
 import playerDetails from './routes/player-details'
 import playerExperience from './routes/player-experience'
+import playerQuests from './routes/player-quests'
 
 dotenv.config()
 
@@ -50,3 +51,4 @@ app.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
 
 app.register(playerDetails)
 app.register(playerExperience)
+app.register(playerQuests)
