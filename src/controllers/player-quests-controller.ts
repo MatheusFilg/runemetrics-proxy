@@ -16,10 +16,14 @@ export async function getPlayerQuestsController(
 			const formattedTitle = quest.title.replace(/ /g, '_')
 
 			const quickGuideUrl = `https://runescape.wiki/w/${formattedTitle}/Quick_guide`
+			const iconUrl = `https://runescape.wiki/images/${formattedTitle}_icon.png?0b972`
+			const rewardUrl = `https://runescape.wiki/images/${formattedTitle}_reward.png?ba8d7`
 
 			return {
 				...quest,
-				url: quickGuideUrl,
+				urlQuestQuickGuide: quickGuideUrl,
+				urlQuestIcon: iconUrl,
+				urlQuestReward: rewardUrl,
 			}
 		})
 

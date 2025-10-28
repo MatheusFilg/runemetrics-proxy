@@ -14,7 +14,9 @@ export default function playerQuests(app: FastifyInstance) {
 					quests: z.array(
 						z.object({
 							title: z.string(),
-							url: z.string(),
+							urlQuestQuickGuide: z.string(),
+							urlQuestIcon: z.string(),
+							urlQuestReward: z.string(),
 							status: z.enum(['COMPLETED', 'NOT_STARTED', 'STARTED']),
 							difficulty: z.number(),
 							members: z.boolean(),

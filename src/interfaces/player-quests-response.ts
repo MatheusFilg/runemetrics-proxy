@@ -5,7 +5,9 @@ export interface PlayerQuestResponse {
 
 interface Quest {
 	title: string
-	url: string
+	urlQuestQuickGuide: string
+	urlQuestIcon: string
+	urlQuestReward: string
 	status: 'COMPLETED' | 'NOT_STARTED' | 'STARTED'
 	difficulty: number
 	members: boolean
