@@ -12,12 +12,38 @@ export async function getPlayerQuestsController(
 
 	try {
 		const playerQuest = await getPlayerQuestsService(user)
+
+		const DEFAULT_ICON_URL = 'https://runescape.wiki/images/Quest_icon.png'
+		const DEFAULT_REWARD_URL = 'https://imgur.com/sFCBK0H.png'
+
 		const questsWithUrl = playerQuest.quests.map(quest => {
+			if (!quest.title || quest.title.trim() === '') {
+				return {
+					...quest,
+					urlQuestIcon: DEFAULT_ICON_URL,
+					urlQuestReward: DEFAULT_REWARD_URL,
+				}
+			}
+
+			let baseTitle = quest.title
+
+			if (baseTitle.includes(':')) {
+				baseTitle = baseTitle.split(':').at(-1)!.trim()
+			}
+
+			if (baseTitle.trim() === '') {
+				return {
+					...quest,
+					urlQuestIcon: DEFAULT_ICON_URL,
+					urlQuestReward: DEFAULT_REWARD_URL,
+				}
+			}
+
 			const formattedTitle = quest.title.replace(/ /g, '_')
 
 			const quickGuideUrl = `https://runescape.wiki/w/${formattedTitle}/Quick_guide`
-			const iconUrl = `https://runescape.wiki/images/${formattedTitle}_icon.png?0b972`
-			const rewardUrl = `https://runescape.wiki/images/${formattedTitle}_reward.png?ba8d7`
+			const iconUrl = `https://runescape.wiki/images/${formattedTitle}_icon.png`
+			const rewardUrl = `https://runescape.wiki/images/${formattedTitle}_reward.png`
 
 			return {
 				...quest,
