@@ -1,4 +1,4 @@
-export interface PlayerDetailsResponse {
+export interface PlayerSummaryResponse {
 	name: string
 	combatlevel: number
 	magic: number

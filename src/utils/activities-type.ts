@@ -1,5 +1,5 @@
 import { customAlphabet } from 'nanoid'
-import type { Activity } from '../interfaces/player-details-response'
+import type { Activity } from '../interfaces/player-summary-response'
 
 export function classifyActivity(activity: Activity): Activity {
 	const id = customAlphabet('1234567890ABCDEF', 6)()

@@ -1,19 +1,19 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
-import type { PlayerDetailsResponse } from '../interfaces/player-details-response'
-import { getPlayerDetailsService } from '../services/player-details-service'
+import type { PlayerSummaryResponse } from '../interfaces/player-summary-response'
+import { getPlayerSummaryService } from '../services/player-summary-service'
 import { classifyActivity } from '../utils/activities-type'
 import { calculateSkillProgress } from '../utils/calculate-skill-progress'
 
-export async function getPlayerDetailsController(
+export async function getPlayerSummaryController(
 	request: FastifyRequest<{
 		Querystring: { name: string; activities: number }
 	}>,
 	reply: FastifyReply
-): Promise<PlayerDetailsResponse> {
+): Promise<PlayerSummaryResponse> {
 	const { name, activities } = request.query
 
 	try {
-		const profile = await getPlayerDetailsService({ name, activities })
+		const profile = await getPlayerSummaryService({ name, activities })
 
 		const classifiedActivities = (profile.activities || []).map(
 			classifyActivity

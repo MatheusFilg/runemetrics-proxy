@@ -1,4 +1,4 @@
-import type { SkillValue } from '../interfaces/player-details-response'
+import type { SkillValue } from '../interfaces/player-summary-response'
 
 const xpTable: number[] = [
 	0, 0, 83, 174, 276, 388, 512, 650, 801, 969, 1154, 1358, 1584, 1833, 2107,

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { PlayerDetailsResponse } from '../interfaces/player-details-response'
+import type { PlayerSummaryResponse } from '../interfaces/player-summary-response'
 import { apiClient } from '../lib/axios'
 
 interface getPlayerDetailsProps {
@@ -7,12 +7,12 @@ interface getPlayerDetailsProps {
 	activities: number
 }
 
-export async function getPlayerDetailsService({
+export async function getPlayerSummaryService({
 	name,
 	activities,
-}: getPlayerDetailsProps): Promise<PlayerDetailsResponse> {
+}: getPlayerDetailsProps): Promise<PlayerSummaryResponse> {
 	try {
-		const response = await apiClient.get<PlayerDetailsResponse>(
+		const response = await apiClient.get<PlayerSummaryResponse>(
 			`/runemetrics/profile/profile?user=${name}&activities=${activities}`
 		)
 		if (!response.data.name) {

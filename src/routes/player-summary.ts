@@ -1,9 +1,9 @@
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
-import { getPlayerDetailsController } from '../controllers/player-details-controller'
+import { getPlayerSummaryController } from '../controllers/player-summary-controller'
 
-export default async function playerDetails(app: FastifyInstance) {
+export default async function playerSummary(app: FastifyInstance) {
 	app.withTypeProvider<ZodTypeProvider>().get('/player-details', {
 		schema: {
 			querystring: z.object({
@@ -53,6 +53,6 @@ export default async function playerDetails(app: FastifyInstance) {
 				}),
 			},
 		},
-		handler: getPlayerDetailsController,
+		handler: getPlayerSummaryController,
 	})
 }
