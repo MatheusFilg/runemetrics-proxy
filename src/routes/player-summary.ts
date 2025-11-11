@@ -4,7 +4,7 @@ import z from 'zod'
 import { getPlayerSummaryController } from '../controllers/player-summary-controller'
 
 export default async function playerSummary(app: FastifyInstance) {
-	app.withTypeProvider<ZodTypeProvider>().get('/player-details', {
+	app.withTypeProvider<ZodTypeProvider>().get('/player-summary', {
 		schema: {
 			querystring: z.object({
 				name: z.string().min(1).max(50),
